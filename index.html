@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <script type="application/javascript" src="vendor/keymaster.js"></script>
+    <script type="application/javascript" src="vendor/jquery-2.1.1.min.js"></script>
+
+    <script type="application/javascript" src="lib/util.js"></script>
+    <script type="application/javascript" src="lib/movingObject.js"></script>
+    <script type="application/javascript" src="lib/asteroid.js"></script>
+    <script type="application/javascript" src="lib/ship.js"></script>
+    <script type="application/javascript" src="lib/bullet.js"></script>
+    <script type="application/javascript" src="lib/game.js"></script>
+    <script type="application/javascript" src="lib/gameView.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+
+      body {
+          background-image:url(
+'https://s3-us-west-1.amazonaws.com/kurtkotzurprofile/asteroids_background.jpg'
+          );
+      }
+
+      #start-message {
+/*        display: inline-block;*/
+        margin-top: 10px;
+        vertical-align: middle;
+        float: none;
+      }
+
+      #instructions {
+        font-family: 'Oxygen', sans-serif;
+        background-color: whitesmoke;
+        text-align: center;
+      }
+
+      .special-font {
+        font-family: "Arial", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+    <div class="row" id="start-message">
+      <div class="col-sm-4 col-sm-offset-4">
+        <div class="panel panel-default" id="instructions">
+          <div class="panel-body">
+            Get ready for some asteroids.<br><br>
+            <strong class="special-font">W</strong>: up<br>
+            <strong class="special-font">A</strong>: left<br>
+            <strong class="special-font">S</strong>: down<br>
+            <strong class="special-font">D</strong>: right<br>
+            <strong class="special-font">space</strong>: fire in current direction
+            <br>
+            <br>
+            <strong class="special-font">press enter to start playing!</strong><br><br>
+            <em>by Kurt Kotzur</em>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <canvas></canvas>
+
+    <script type="application/javascript">
+      key("enter", function () {
+        $(".container").remove();
+        startGame();
+      });
+
+      function startGame() {
+        var canvasEl = document.getElementsByTagName("canvas")[0];
+        canvasEl.width = Asteroids.Game.DIM_X;
+        canvasEl.height = Asteroids.Game.DIM_Y;
+        // canvasEl.width = $(document).width();
+        // canvasEl.height = $(document).height();
+
+        var ctx = canvasEl.getContext("2d");
+        var game = new Asteroids.Game();
+        new Asteroids.GameView(game, ctx).start();
+      };
+    </script>
+  </body>
+</head>
